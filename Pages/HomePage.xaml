@@ -3,35 +3,69 @@
              x:Class="GoalQuest.HomePage"
              BackgroundColor="#F8CFA0">
 
-    <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
+    <VerticalStackLayout Padding="5" Spacing="10" VerticalOptions="CenterAndExpand">
 
-        <Button Text="Set Goal" 
-                BackgroundColor="#272D2D" 
-                TextColor="White" 
-                CornerRadius="10" 
-                FontSize="20" 
-                Clicked="OnSetGoalClicked"/>
+        <Label Text="Your Arsenal"
+               FontSize="30"
+               FontFamily="cursive"
+               FontAttributes="Bold"
+               TextColor="#272D2D"
+               HorizontalOptions="Center"/>
 
-        <Button Text="Track Progress" 
-                BackgroundColor="#272D2D" 
-                TextColor="White" 
-                CornerRadius="10" 
-                FontSize="20" 
-                Clicked="OnTrackProgressClicked"/>
+        <Grid Padding="20" RowSpacing="20" ColumnSpacing="20"
+          VerticalOptions="CenterAndExpand">
 
-        <Button Text="User Profile" 
-                BackgroundColor="#272D2D" 
-                TextColor="White" 
-                CornerRadius="10" 
-                FontSize="20" 
-                Clicked="OnUserProfileClicked"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Button Text="Rewards" 
-                BackgroundColor="#272D2D" 
-                TextColor="White" 
-                CornerRadius="10" 
-                FontSize="20" 
-                Clicked="OnRewardsClicked"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
+            <Button Text="Start Quest"
+                    BackgroundColor="#A8295D"
+                    TextColor="White"
+                    CornerRadius="15"
+                    FontSize="15"
+                    HeightRequest="120"
+                    WidthRequest="120"
+                    Grid.Row="0" Grid.Column="0"
+                    Clicked="OnSetGoalClicked"/>
+
+            <Button Text="Journey Log"
+                    BackgroundColor="#407C82"
+                    TextColor="White"
+                    CornerRadius="15"
+                    FontSize="15"
+                    HeightRequest="120"
+                    WidthRequest="120"
+                    Grid.Row="0" Grid.Column="1"
+                    Clicked="OnTrackProgressClicked"/>
+
+            <Button Text="Hero’s Vault"
+                    BackgroundColor="#407C82"
+                    TextColor="White"
+                    CornerRadius="15"
+                    FontSize="15"
+                    HeightRequest="120"
+                    WidthRequest="120"
+                    Grid.Row="1" Grid.Column="0"
+                    Clicked="OnUserProfileClicked"/>
+
+            <Button Text="Victory Chest"
+                    BackgroundColor="#A8295D"
+                    TextColor="White"
+                    CornerRadius="15"
+                    FontSize="15"
+                    HeightRequest="120"
+                    WidthRequest="120"
+                    Grid.Row="1" Grid.Column="1"
+                    Clicked="OnRewardsClicked"/>
+
+        </Grid>
     </VerticalStackLayout>
+    
 </ContentPage>

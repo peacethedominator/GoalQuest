@@ -56,18 +56,4 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private async void SetGoal_Clicked(object sender, EventArgs e)
-    {
-        //await Navigation.PushAsync(new SetGoalPage());
-    }
-
-    private async void Profile_Clicked(object sender, EventArgs e)
-    {
-        // Navigation.PushAsync(new UserProfilePage());
-    }
-
-    private async void TrackProgress_Clicked(object sender, EventArgs e)
-    {
-        //await Navigation.PushAsync(new DailySummaryPage());
-    }
 }

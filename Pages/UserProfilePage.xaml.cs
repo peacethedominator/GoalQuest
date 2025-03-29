@@ -150,9 +150,9 @@ namespace GoalQuest
 
     public class Profile
     {
-        public string Name { get; set; }
-        public string DateOfBirth { get; set; }
-        public string Motivation { get; set; }
-        public string ImagePath { get; set; }
+        public required string Name { get; set; }
+        public required string DateOfBirth { get; set; }
+        public required string Motivation { get; set; }
+        public required string ImagePath { get; set; }
     }
 }
