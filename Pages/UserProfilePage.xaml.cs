@@ -42,16 +42,35 @@ namespace GoalQuest
             }
         }
 
-        private void SaveProfileData(string name, string dob, string aim, string imagePath)
+        private async void SaveProfileData(string name, string dob, string aim, string imagePath)
         {
             string imageFileName = Path.GetFileName(imagePath);
             string destinationPath = Path.Combine(userFolder, imageFileName);
 
             try
             {
+                if (!Directory.Exists(userFolder))
+                {
+                    Directory.CreateDirectory(userFolder);
+                }
+
+                Profile existingProfile = null;
+                if (File.Exists(filePath))
+                {
+                    string existingData = await File.ReadAllTextAsync(filePath);
+                    existingProfile = JsonSerializer.Deserialize<Profile>(existingData);
+                }
+
                 if (!string.IsNullOrWhiteSpace(imagePath) && File.Exists(imagePath))
                 {
-                    File.Copy(imagePath, destinationPath, true);
+                    if (existingProfile == null || existingProfile.ImagePath != destinationPath)
+                    {
+                        File.Copy(imagePath, destinationPath, overwrite: true);
+                    }
+                    else
+                    {
+                        Console.WriteLine("No changes in image. Skipping copy.");
+                    }
                 }
 
                 var profile = new Profile
@@ -62,12 +81,14 @@ namespace GoalQuest
                     ImagePath = destinationPath
                 };
 
-                var jsonData = JsonSerializer.Serialize(profile);
-                File.WriteAllText(filePath, jsonData);
+                var jsonData = JsonSerializer.Serialize(profile, new JsonSerializerOptions { WriteIndented = true });
+                await File.WriteAllTextAsync(filePath, jsonData);
+
+                Console.WriteLine("Profile data saved.");
             }
-            catch (IOException ex)
+            catch (Exception ex)
             {
-                Console.WriteLine($"Error copying image: {ex.Message}");
+                Console.WriteLine($"Error saving profile: {ex.Message}");
             }
         }
 
