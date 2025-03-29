@@ -11,12 +11,12 @@ namespace GoalQuest
 
         private async void OnSetGoalClicked(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new SetGoalPage());
+            await Navigation.PushAsync(new SetGoalPage());
         }
 
         private async void OnTrackProgressClicked(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new TrackProgressPage());
+            await Navigation.PushAsync(new TrackProgressPage());
         }
 
         private async void OnUserProfileClicked(object sender, EventArgs e)
@@ -29,7 +29,7 @@ namespace GoalQuest
 
         private async void OnRewardsClicked(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new RewardsPage());
+            await Navigation.PushAsync(new RewardsPage());
         }
     }
 }
