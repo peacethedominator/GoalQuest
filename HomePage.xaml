@@ -1,0 +1,37 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GoalQuest.HomePage"
+             BackgroundColor="#F8CFA0">
+
+    <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
+
+        <Button Text="Set Goal" 
+                BackgroundColor="#272D2D" 
+                TextColor="White" 
+                CornerRadius="10" 
+                FontSize="20" 
+                Clicked="OnSetGoalClicked"/>
+
+        <Button Text="Track Progress" 
+                BackgroundColor="#272D2D" 
+                TextColor="White" 
+                CornerRadius="10" 
+                FontSize="20" 
+                Clicked="OnTrackProgressClicked"/>
+
+        <Button Text="User Profile" 
+                BackgroundColor="#272D2D" 
+                TextColor="White" 
+                CornerRadius="10" 
+                FontSize="20" 
+                Clicked="OnUserProfileClicked"/>
+
+        <Button Text="Rewards" 
+                BackgroundColor="#272D2D" 
+                TextColor="White" 
+                CornerRadius="10" 
+                FontSize="20" 
+                Clicked="OnRewardsClicked"/>
+
+    </VerticalStackLayout>
+</ContentPage>

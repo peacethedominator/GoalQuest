@@ -1,0 +1,47 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GoalQuest.MainPage"
+             BackgroundColor="#F8CFA0">
+
+    <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="FillAndExpand">
+
+        <Label Text="Need Motivation?"
+               FontSize="30"
+               FontAttributes="Bold"
+               FontFamily="cursive"
+               TextColor="Black"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+
+        <BoxView HeightRequest="30" BackgroundColor="#F8CFA0"/>
+
+        <!-- Quote Box -->
+        <Frame BorderColor="Black" CornerRadius="15" Padding="20" BackgroundColor="#FFFFFF" VerticalOptions="CenterAndExpand">
+            <Label x:Name="QuoteLabel" 
+                   FontSize="24" 
+                   TextColor="Black"
+                   FontFamily="cursive"
+                   FontAttributes="Italic"
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center"/>
+        </Frame>
+
+        <BoxView HeightRequest="30"  BackgroundColor="#F8CFA0"/>
+
+        <!-- Button to set profile or start at bottom -->
+        <VerticalStackLayout VerticalOptions="EndAndExpand">
+            <Button x:Name="StartButton"
+                    Text="Let's make Progress ..."
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    FontFamily="sans-serif"
+                    BackgroundColor="#272D2D"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Padding="15"
+                    
+                    Clicked="StartButton_Clicked"/>
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

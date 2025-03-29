@@ -1,0 +1,35 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GoalQuest.WelcomePage"
+             BackgroundColor="#F8CFA0">
+
+    <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
+
+        <Image x:Name="ProfileImage" WidthRequest="100" HeightRequest="100" Aspect="AspectFit"/>
+
+        <Label x:Name="WelcomeLabel"
+               FontSize="30"
+               FontAttributes="Bold"
+               FontFamily="cursive"
+               TextColor="Black"
+               HorizontalOptions="Center"/>
+
+        <Label x:Name="MotivationLabel"
+               FontSize="24"
+               FontAttributes="Italic"
+               FontFamily="sans-serif"
+               TextColor="Black"
+               HorizontalOptions="Center"/>
+
+        <Button Text="Ay Ay!"
+                FontAttributes="Bold"
+                FontSize="20"
+                BackgroundColor="#272D2D"
+                TextColor="White"
+                CornerRadius="10"
+                Padding="15"
+                Clicked="GoToHome_Clicked"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>

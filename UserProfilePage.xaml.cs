@@ -1,0 +1,137 @@
+using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.Maui.Controls;
+using System.IO;
+using System.Text.Json;
+using System.Threading.Tasks;
+
+namespace GoalQuest
+{
+    public partial class UserProfilePage : ContentPage
+    {
+        private readonly string userFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "UserData");
+        private readonly string filePath;
+        private string _profileImagePath;
+
+        public UserProfilePage()
+        {
+            InitializeComponent();
+
+            if (!Directory.Exists(userFolder))
+            {
+                Directory.CreateDirectory(userFolder);
+            }
+
+            filePath = Path.Combine(userFolder, "profile.json");
+        }
+
+        public async Task LoadProfileDataAsync()
+        {
+            if (File.Exists(filePath))
+            {
+                var data = await File.ReadAllTextAsync(filePath);
+                var profile = JsonSerializer.Deserialize<Profile>(data);
+
+                if (profile != null)
+                {
+                    NameEntry.Text = profile.Name;
+                    DOBEntry.Text = profile.DateOfBirth;
+                    MotivationEntry.Text = profile.Motivation;
+                    ProfileImageButton.Source = ImageSource.FromFile(profile.ImagePath);
+                    _profileImagePath = profile.ImagePath;
+                }
+            }
+        }
+
+        private void SaveProfileData(string name, string dob, string aim, string imagePath)
+        {
+            string imageFileName = Path.GetFileName(imagePath);
+            string destinationPath = Path.Combine(userFolder, imageFileName);
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(imagePath) && File.Exists(imagePath))
+                {
+                    File.Copy(imagePath, destinationPath, true);
+                }
+
+                var profile = new Profile
+                {
+                    Name = name,
+                    DateOfBirth = dob,
+                    Motivation = aim,
+                    ImagePath = destinationPath
+                };
+
+                var jsonData = JsonSerializer.Serialize(profile);
+                File.WriteAllText(filePath, jsonData);
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"Error copying image: {ex.Message}");
+            }
+        }
+
+        private async void OnImageButtonClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
+                {
+                    Title = "Pick a profile picture"
+                });
+
+                if (result != null)
+                {
+                    _profileImagePath = result.FullPath;
+                    ProfileImageButton.Source = ImageSource.FromFile(_profileImagePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Failed to pick image: {ex.Message}", "OK");
+            }
+        }
+
+        private async void SaveButton_Clicked(object sender, EventArgs e)
+        {
+            if (ValidateInputs())
+            {
+                string name = NameEntry.Text;
+                string dob = DOBEntry.Text;
+                string aim = MotivationEntry.Text;
+
+                SaveProfileData(name, dob, aim, _profileImagePath);
+
+                await DisplayAlert("Success", "Profile saved successfully!", "OK");
+                await Navigation.PushAsync(new HomePage());
+            }
+        }
+
+        private bool ValidateInputs()
+        {
+            if (string.IsNullOrWhiteSpace(NameEntry.Text) ||
+                string.IsNullOrWhiteSpace(DOBEntry.Text) ||
+                string.IsNullOrWhiteSpace(MotivationEntry.Text))
+            {
+                DisplayAlert("Error", "Please fill in all fields.", "OK");
+                return false;
+            }
+
+            if (!DateTime.TryParseExact(DOBEntry.Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out _))
+            {
+                DisplayAlert("Error", "Invalid Date of Birth format.", "OK");
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+    public class Profile
+    {
+        public string Name { get; set; }
+        public string DateOfBirth { get; set; }
+        public string Motivation { get; set; }
+        public string ImagePath { get; set; }
+    }
+}

@@ -1,0 +1,46 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GoalQuest.UserProfilePage"
+             BackgroundColor="#F8CFA0">
+
+    <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="FillAndExpand">
+
+        <Label Text="Set Up Your Profile"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="Black"
+               HorizontalOptions="Center"/>
+        
+        <Label Text="Upload a photo"
+                       FontSize="12"
+                       FontAttributes="Italic"
+                       TextColor="Gray"
+                       HorizontalOptions="Center"/>
+        
+        <ImageButton x:Name="ProfileImageButton" 
+                             Source="placeholder.png" 
+                             WidthRequest="100" 
+                             HeightRequest="100" 
+                             Aspect="AspectFit"
+                             HorizontalOptions="Center"
+                             BackgroundColor="#DDDDDD"
+                             Clicked="OnImageButtonClicked"/>
+        
+        <Label Text="Personal Details"
+            FontSize="14"
+            FontAttributes="Bold"
+            TextColor="Black"/>
+        
+        <Entry BackgroundColor="White" Placeholder="Enter your name" x:Name="NameEntry" HeightRequest="35"/>
+        <Entry BackgroundColor="White" Placeholder="Enter your DOB" x:Name="DOBEntry" HeightRequest="35"/>
+        <Entry BackgroundColor="White" Placeholder="Enter your final aim" x:Name="MotivationEntry" HeightRequest="35"/>
+
+        <Button Text="Save"
+                BackgroundColor="#272D2D"
+                TextColor="White"
+                CornerRadius="10"
+                Padding="15"
+                Clicked="SaveButton_Clicked"/>
+
+    </VerticalStackLayout>
+</ContentPage>
