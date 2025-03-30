@@ -1,12 +1,52 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GoalQuest.Pages.TrackProgressPage"
-             Title="TrackProgressPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="GoalQuest.TrackProgressPage"
+             BackgroundColor="#F8CFA0">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Label Text="Track Your Progress"
+                   FontSize="25"
+                   FontAttributes="Bold"
+                   FontFamily="cursive"
+                   HorizontalOptions="Center"/>
+
+            <Label x:Name="DailyProgressLabel"
+                   Text="Daily Progress: 0/0 Points"
+                   FontFamily="cursive"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <CollectionView x:Name="GoalsCollection" ItemsSource="{Binding Goals}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5" BorderColor="Gray">
+                            <Grid ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Goal}"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       VerticalOptions="Center"
+                                       Grid.Column="0"/>
+
+                                <Button Text="{Binding ButtonText}"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        CornerRadius="20"
+                                        BackgroundColor="{Binding ButtonColor}"
+                                        Command="{Binding ToggleStatusCommand}"
+                                        Grid.Column="1"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
