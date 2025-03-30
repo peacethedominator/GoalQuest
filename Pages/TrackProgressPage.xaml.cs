@@ -4,7 +4,7 @@ namespace GoalQuest
 	{
 		public TrackProgressPage()
 		{
-			InitializeComponent();
+			//InitializeComponent();
 		}
 	}
 }

@@ -4,7 +4,7 @@ namespace GoalQuest
 	{
 		public RewardsPage()
 		{
-			InitializeComponent();
+			//InitializeComponent();
 		}
 	}
 }
