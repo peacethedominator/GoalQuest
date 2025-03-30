@@ -45,7 +45,7 @@
                     Grid.Row="0" Grid.Column="1"
                     Clicked="OnTrackProgressClicked"/>
 
-            <Button Text="Hero’s Vault"
+            <Button Text="Hero's Vault" 
                     BackgroundColor="#407C82"
                     TextColor="White"
                     CornerRadius="15"
