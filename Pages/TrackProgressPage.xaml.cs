@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Microsoft.Maui.Controls;
+using System.Text.Json.Serialization;
 
 namespace GoalQuest
 {
@@ -15,15 +17,20 @@ namespace GoalQuest
         private readonly string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GoalsData.json");
         private string _dateKey;
 
-        public List<GoalItemProgress> Goals { get; set; } = new();
+        public ObservableCollection<GoalItemProgress> Goals { get; set; } = new(); // Use ObservableCollection
 
         public TrackProgressPage()
         {
             InitializeComponent();
             _dateKey = DateTime.Now.ToString("yyyy-MM-dd");
+            BindingContext = this;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             _goals = LoadGoals();
             LoadExistingGoals();
-            BindingContext = this;
         }
 
         private void LoadExistingGoals()
@@ -34,39 +41,27 @@ namespace GoalQuest
                 _goals[_dateKey] = existingGoals;
             }
 
-            Goals = existingGoals;
+            Goals.Clear(); 
 
-            foreach (var goal in Goals)
+            foreach (var goal in existingGoals)
             {
                 goal.UpdateButtonProperties();
+
                 goal.ToggleStatusCommand = new Command(() => ToggleGoalStatus(goal));
+
+                Goals.Add(goal);
             }
 
-            RefreshGoals();
             UpdateDailyProgress();
         }
+
 
         private void ToggleGoalStatus(GoalItemProgress goal)
         {
-            if (goal.Status == GoalStatus.Incomplete)
-            {
-                goal.Status = GoalStatus.Completed;
-            }
-            else
-            {
-                goal.Status = GoalStatus.Incomplete;
-            }
-
-            goal.UpdateButtonProperties(); // Ensure UI updates
+            goal.Status = goal.Status == GoalStatus.Incomplete ? GoalStatus.Completed : GoalStatus.Incomplete;
+            goal.UpdateButtonProperties();
             SaveGoals();
-            RefreshGoals();
             UpdateDailyProgress();
-        }
-
-        private void RefreshGoals()
-        {
-            GoalsCollection.ItemsSource = null;
-            GoalsCollection.ItemsSource = Goals;
         }
 
         private void UpdateDailyProgress()
@@ -150,6 +145,7 @@ namespace GoalQuest
             }
         }
 
+        [JsonIgnore]
         public Command ToggleStatusCommand { get; set; }
 
         public GoalItemProgress(string goal, int points)
@@ -158,21 +154,13 @@ namespace GoalQuest
             Points = points;
             Status = GoalStatus.Incomplete;
             UpdateButtonProperties();
-            ToggleStatusCommand = new Command(() => { }); // Placeholder, will be assigned in page
+            ToggleStatusCommand = new Command(() => { }); 
         }
 
         public void UpdateButtonProperties()
         {
-            if (Status == GoalStatus.Completed)
-            {
-                ButtonText = "✔";
-                ButtonColor = "Green";
-            }
-            else
-            {
-                ButtonText = "✖";
-                ButtonColor = "Red";
-            }
+            ButtonText = Status == GoalStatus.Completed ? "✔" : "✖";
+            ButtonColor = Status == GoalStatus.Completed ? "Green" : "Red";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
