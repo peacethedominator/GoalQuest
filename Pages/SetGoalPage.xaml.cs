@@ -17,7 +17,7 @@ namespace GoalQuest
         {
             InitializeComponent();
             _tempGoals = new List<GoalItem>();
-            //_goals = LoadGoals();
+            _goals = LoadGoals();
             LoadExistingGoals();
         }
 
@@ -25,7 +25,7 @@ namespace GoalQuest
         {
             string dateKey = DateTime.Now.ToString("yyyy-MM-dd");
 
-            _tempGoals.Clear();
+            //_tempGoals.Clear();
 
             if (_goals.TryGetValue(dateKey, out var existingGoals))
             {
@@ -92,21 +92,26 @@ namespace GoalQuest
             }
         }
 
-        private Dictionary<string, List<(string Goal, int Points)>> LoadGoals()
+        private Dictionary<string, List<GoalItem>> LoadGoals()
         {
             if (File.Exists(_filePath))
             {
                 try
                 {
                     string json = File.ReadAllText(_filePath);
-                    return JsonSerializer.Deserialize<Dictionary<string, List<(string, int)>>>(json) ?? new Dictionary<string, List<(string, int)>>();
+                    var rawData = JsonSerializer.Deserialize<Dictionary<string, List<GoalItemDto>>>(json);
+
+                    return rawData?.ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Select(g => new GoalItem(g.Goal, g.Points, RemoveGoal)).ToList()
+                    ) ?? new Dictionary<string, List<GoalItem>>();
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error loading goals: {ex.Message}");
                 }
             }
-            return new Dictionary<string, List<(string, int)>>();
+            return new Dictionary<string, List<GoalItem>>();
         }
     }
 
@@ -123,5 +128,10 @@ namespace GoalQuest
             Points = points;
             RemoveCommand = new Command(() => removeAction(this));
         }
+    }
+    public class GoalItemDto
+    {
+        public string Goal { get; set; }
+        public int Points { get; set; }
     }
 }
