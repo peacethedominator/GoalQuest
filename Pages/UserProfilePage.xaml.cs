@@ -1,4 +1,8 @@
+using System;
+using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
 
 namespace GoalQuest
 {
@@ -18,6 +22,7 @@ namespace GoalQuest
             }
 
             filePath = Path.Combine(userFolder, "profile.json");
+            LoadProfileDataAsync();
         }
 
         public async Task LoadProfileDataAsync()
@@ -30,7 +35,7 @@ namespace GoalQuest
                 if (profile != null)
                 {
                     NameEntry.Text = profile.Name;
-                    DOBEntry.Text = profile.DateOfBirth;
+                    DOBEntry.Date = DateTime.Parse(profile.DateOfBirth);
                     MotivationEntry.Text = profile.Motivation;
                     ProfileImageButton.Source = ImageSource.FromFile(profile.ImagePath);
                     _profileImagePath = profile.ImagePath;
@@ -38,7 +43,7 @@ namespace GoalQuest
             }
         }
 
-        private async void SaveProfileData(string name, string dob, string aim, string imagePath)
+        private async Task SaveProfileData(string name, string dob, string aim, string imagePath)
         {
             string imageFileName = Path.GetFileName(imagePath);
             string destinationPath = Path.Combine(userFolder, imageFileName);
@@ -114,10 +119,10 @@ namespace GoalQuest
             if (ValidateInputs())
             {
                 string name = NameEntry.Text;
-                string dob = DOBEntry.Text;
+                string dob = DOBEntry.Date.ToString("yyyy-MM-dd");
                 string aim = MotivationEntry.Text;
 
-                SaveProfileData(name, dob, aim, _profileImagePath);
+                await SaveProfileData(name, dob, aim, _profileImagePath);
 
                 await DisplayAlert("Success", "Profile saved successfully!", "OK");
                 await Navigation.PushAsync(new HomePage());
@@ -127,16 +132,9 @@ namespace GoalQuest
         private bool ValidateInputs()
         {
             if (string.IsNullOrWhiteSpace(NameEntry.Text) ||
-                string.IsNullOrWhiteSpace(DOBEntry.Text) ||
                 string.IsNullOrWhiteSpace(MotivationEntry.Text))
             {
                 DisplayAlert("Error", "Please fill in all fields.", "OK");
-                return false;
-            }
-
-            if (!DateTime.TryParseExact(DOBEntry.Text, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out _))
-            {
-                DisplayAlert("Error", "Invalid Date of Birth format.", "OK");
                 return false;
             }
 

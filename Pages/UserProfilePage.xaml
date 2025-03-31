@@ -32,10 +32,9 @@
             FontSize="14"
             FontAttributes="Bold"
             TextColor="Black"/>
-
-            <Entry BackgroundColor="White" TextColor="Black" Placeholder="Enter your name" x:Name="NameEntry" HeightRequest="40"/>
-            <Entry BackgroundColor="White" TextColor="Black" Placeholder="Enter your DOB" x:Name="DOBEntry" HeightRequest="40"/>
-            <Entry BackgroundColor="White" TextColor="Black" Placeholder="Enter your final aim" x:Name="MotivationEntry" HeightRequest="40"/>
+            <Entry  TextColor="Black" Placeholder="Enter your name" PlaceholderColor="DarkSlateGrey" x:Name="NameEntry" HeightRequest="40"/>
+            <DatePicker x:Name="DOBEntry" Format="yyyy-MM-dd" HorizontalOptions="FillAndExpand" />
+            <Entry TextColor="Black" Placeholder="Enter your aim" PlaceholderColor="DarkSlateGrey" x:Name="MotivationEntry" HeightRequest="40"/>
 
             <Button Text="Save"
                 BackgroundColor="#272D2D"
