@@ -66,6 +66,10 @@ Fonts not displaying? Install custom fonts via the Resources/Fonts folder.
 Data not loading? Verify GoalsData.json exists in local storage.
 
 ______________________________________________________________________________________________
+Creating APK
+dotnet publish -f net8.0-android -c Release -o ./publish
+
+______________________________________________________________________________________________
 👥 Contributor
 
 Aman Varchaswi
