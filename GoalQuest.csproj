@@ -65,6 +65,9 @@
 	  <MauiXaml Update="HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\GoalHistory.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\RewardsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

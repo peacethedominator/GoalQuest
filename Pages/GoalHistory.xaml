@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GoalQuest.GoalHistory"
+             Title="Warrior's Tale"
+             BackgroundColor="#F8CFA0">
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="15">
+            <CollectionView ItemsSource="{Binding GroupedGoals}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" Margin="5"
+                               CornerRadius="10"
+                               BackgroundColor="Black"
+                               HasShadow="True">
+                            <VerticalStackLayout Spacing="5">
+                                <!-- Date Header -->
+                                <Label Text="{Binding Date}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="White"
+                                       Padding="5"/>
+
+                                <!-- Goals List inside date box -->
+                                <CollectionView ItemsSource="{Binding Goals}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Padding="10"
+                                                   Margin="5"
+                                                   CornerRadius="10"
+                                                   BackgroundColor="{Binding StatusColor}">
+                                                <Label Text="{Binding GoalTitle}" 
+                                                       FontSize="14" 
+                                                       TextColor="White"/>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

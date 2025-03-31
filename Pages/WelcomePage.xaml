@@ -1,43 +1,68 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GoalQuest.WelcomePage"
-             BackgroundColor="#F8CFA0">
+             Title="Greetings!">
 
-    <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
+    <!-- Background Gradient -->
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="#FFB677" Offset="0.0"/>
+            <GradientStop Color="#FF3CAC" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
 
-        <Frame Padding="0" CornerRadius="50" BackgroundColor="#ACE9AA" HasShadow="True"
-               WidthRequest="100" HeightRequest="100" BorderColor="Black">
-            <Image x:Name="ProfileImage"
-               WidthRequest="100"
-               HeightRequest="100"
-               Aspect="AspectFill"
+    <VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="CenterAndExpand">
+
+        <!-- Profile Picture Frame -->
+        <Frame Padding="5" CornerRadius="50"
+               BackgroundColor="White"
+               HasShadow="True"
+               WidthRequest="110" HeightRequest="110"
+               BorderColor="Black"
                VerticalOptions="Center"
-               HorizontalOptions="Center"/>
+               HorizontalOptions="Center">
+            <Image x:Name="ProfileImage"
+                   WidthRequest="110"
+                   HeightRequest="110"
+                   Aspect="AspectFill"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"/>
         </Frame>
 
-
+        <!-- Welcome Label -->
         <Label x:Name="WelcomeLabel"
-               FontSize="30"
+               FontSize="32"
                FontAttributes="Bold"
-               FontFamily="cursive"
-               TextColor="Black"
+               FontFamily="Arial"
+               TextColor="White"
                HorizontalOptions="Center"/>
 
+        <!-- Motivational Quote -->
         <Label x:Name="MotivationLabel"
-               FontSize="24"
+               FontSize="22"
                FontAttributes="Italic"
                FontFamily="serif"
                TextColor="Black"
+               Opacity="0.8"
                HorizontalOptions="Center"/>
 
-        <Button Text="Ay Ay!"
+        <!-- Animated Button -->
+        <Button Text="Let's Begin!"
                 FontAttributes="Bold"
-                FontSize="20"
+                FontSize="22"
                 BackgroundColor="#272D2D"
                 TextColor="White"
-                CornerRadius="10"
+                CornerRadius="15"
                 Padding="15"
-                Clicked="GoToHome_Clicked"/>
+                WidthRequest="200"
+                HorizontalOptions="Center"
+                Clicked="GoToHome_Clicked">
+            <Button.Triggers>
+                <Trigger TargetType="Button" Property="IsPressed" Value="True">
+                    <Setter Property="Scale" Value="0.95"/>
+                </Trigger>
+            </Button.Triggers>
+        </Button>
 
     </VerticalStackLayout>
 

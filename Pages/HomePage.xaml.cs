@@ -1,4 +1,3 @@
-using Microsoft.Maui.Controls;
 
 namespace GoalQuest
 {
@@ -31,5 +30,11 @@ namespace GoalQuest
         {
             await Navigation.PushAsync(new RewardsPage());
         }
+
+        private async void OnGoalHistoryClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new GoalHistory());
+        }
+        
     }
 }

@@ -1,6 +1,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GoalQuest.SetGoalPage"
+             Title="Start Quest"
              BackgroundColor="#F8CFA0">
 
     <ScrollView>
