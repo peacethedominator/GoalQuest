@@ -16,9 +16,10 @@
             <Entry x:Name="GoalEntry"
                    Placeholder="Enter your to-do item..."
                    FontSize="15"
+                   TextColor="Black"
                    HorizontalOptions="FillAndExpand"/>
 
-            <Picker x:Name="PointPicker" Title="Select Points" HorizontalOptions="FillAndExpand" HeightRequest="35">
+            <Picker x:Name="PointPicker" Title="Select Points" HorizontalOptions="FillAndExpand" HeightRequest="40">
                 <Picker.Items>
                     <x:String>5</x:String>
                     <x:String>10</x:String>

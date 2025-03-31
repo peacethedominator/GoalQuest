@@ -4,21 +4,22 @@
              x:Class="GoalQuest.UserProfilePage"
              Title="Hero's Vault">
 
-    <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="FillAndExpand">
+    <ScrollView>
+        <VerticalStackLayout Padding="15" Spacing="20" VerticalOptions="FillAndExpand">
 
-        <Label Text="Set Up Your Profile"
+            <Label Text="Set Up Your Profile"
                FontSize="20"
                FontAttributes="Bold"
                TextColor="Black"
                HorizontalOptions="Center"/>
-        
-        <Label Text="Upload a photo"
+
+            <Label Text="Upload a photo"
                        FontSize="12"
                        FontAttributes="Italic"
                        TextColor="Gray"
                        HorizontalOptions="Center"/>
-        
-        <ImageButton x:Name="ProfileImageButton" 
+
+            <ImageButton x:Name="ProfileImageButton" 
                              Source="placeholder.png" 
                              WidthRequest="100" 
                              HeightRequest="100" 
@@ -26,22 +27,23 @@
                              HorizontalOptions="Center"
                              BackgroundColor="#DDDDDD"
                              Clicked="OnImageButtonClicked"/>
-        
-        <Label Text="Personal Details"
+
+            <Label Text="Personal Details"
             FontSize="14"
             FontAttributes="Bold"
             TextColor="Black"/>
-        
-        <Entry BackgroundColor="White" Placeholder="Enter your name" x:Name="NameEntry" HeightRequest="35"/>
-        <Entry BackgroundColor="White" Placeholder="Enter your DOB" x:Name="DOBEntry" HeightRequest="35"/>
-        <Entry BackgroundColor="White" Placeholder="Enter your final aim" x:Name="MotivationEntry" HeightRequest="35"/>
 
-        <Button Text="Save"
+            <Entry BackgroundColor="White" TextColor="Black" Placeholder="Enter your name" x:Name="NameEntry" HeightRequest="40"/>
+            <Entry BackgroundColor="White" TextColor="Black" Placeholder="Enter your DOB" x:Name="DOBEntry" HeightRequest="40"/>
+            <Entry BackgroundColor="White" TextColor="Black" Placeholder="Enter your final aim" x:Name="MotivationEntry" HeightRequest="40"/>
+
+            <Button Text="Save"
                 BackgroundColor="#272D2D"
                 TextColor="White"
                 CornerRadius="10"
                 Padding="15"
                 Clicked="SaveButton_Clicked"/>
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </local:BasePage>
