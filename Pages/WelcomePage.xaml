@@ -5,7 +5,16 @@
 
     <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
 
-        <Image x:Name="ProfileImage" WidthRequest="100" HeightRequest="100" Aspect="AspectFit"/>
+        <Frame Padding="0" CornerRadius="50" BackgroundColor="#ACE9AA" HasShadow="True"
+               WidthRequest="100" HeightRequest="100" BorderColor="Black">
+            <Image x:Name="ProfileImage"
+               WidthRequest="100"
+               HeightRequest="100"
+               Aspect="AspectFill"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"/>
+        </Frame>
+
 
         <Label x:Name="WelcomeLabel"
                FontSize="30"
@@ -17,7 +26,7 @@
         <Label x:Name="MotivationLabel"
                FontSize="24"
                FontAttributes="Italic"
-               FontFamily="sans-serif"
+               FontFamily="serif"
                TextColor="Black"
                HorizontalOptions="Center"/>
 

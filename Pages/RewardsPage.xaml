@@ -1,12 +1,58 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GoalQuest.Pages.RewardsPage"
-             Title="RewardsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             x:Class="GoalQuest.RewardsPage"
+             BackgroundColor="#F8CFA0">
+
+    <VerticalStackLayout Padding="10" Spacing="10">
+
+        <Label Text="Victory Chest"
+               FontSize="30"
+               FontAttributes="Bold"
+               FontFamily="cursive"
+               HorizontalOptions="Center"/>
+
+        <!-- Level Display Section -->
+        <Frame Padding="15" CornerRadius="15" BackgroundColor="#161B31" HasShadow="True"
+       HorizontalOptions="Center">
+            <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                <Label x:Name="CurrentLevelLabel" 
+               Text="Level: 1" 
+               TextColor="White"
+               FontSize="20" 
+               FontFamily="serif"
+               FontAttributes="Bold" 
+               HorizontalOptions="Center"/>
+
+                <!-- New Label for Points Needed -->
+                <Label x:Name="NextLevelLabel"
+               Text="Points needed for next level: 100"
+               TextColor="White"
+               FontSize="15"
+               FontFamily="serif"
+               HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Daily Progress Section -->
+        <Frame Padding="10" CornerRadius="15" BackgroundColor="#ACE9AA" HasShadow="True">
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Daily Progress" FontFamily="serif" FontSize="18" FontAttributes="Bold"/>
+                <ProgressBar x:Name="DailyProgressBar" Progress="0" HeightRequest="20"/>
+                <Label x:Name="DailyPointsLabel" FontSize="16" Text="0/100 pts"/>
+                <Label x:Name="DailyProgressPercentageLabel" FontSize="14" Text="0% Complete"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- All-Time Progress Section -->
+        <Frame Padding="10" CornerRadius="15" BackgroundColor="#B9B9CB" HasShadow="True">
+            <VerticalStackLayout Spacing="10">
+                <Label Text="All-Time Progress" FontFamily="serif" FontSize="18" FontAttributes="Bold"/>
+                <ProgressBar x:Name="AllTimeProgressBar" Progress="0" HeightRequest="20"/>
+                <Label x:Name="AllTimePointsLabel" FontSize="16" Text="0/1000 pts"/>
+                <Label x:Name="AllTimeProgressPercentageLabel" FontSize="14" Text="0% Complete"/>
+                <Label x:Name="StreakLabel" FontSize="14" Text="Streak: 0 days"/>
+            </VerticalStackLayout>
+        </Frame>
+
     </VerticalStackLayout>
 </ContentPage>
