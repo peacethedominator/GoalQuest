@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text.Json;
-using Microsoft.Maui.Controls;
 
 namespace GoalQuest
 {
-    public partial class SetGoalPage : ContentPage
+    public partial class SetGoalPage : BasePage
     {
         private Dictionary<string, List<GoalItem>> _goals;
         private List<GoalItem> _tempGoals;

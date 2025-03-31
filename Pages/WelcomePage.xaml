@@ -1,15 +1,8 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<local:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GoalQuest"
              x:Class="GoalQuest.WelcomePage"
              Title="Greetings!">
-
-    <!-- Background Gradient -->
-    <ContentPage.Background>
-        <LinearGradientBrush>
-            <GradientStop Color="#FFB677" Offset="0.0"/>
-            <GradientStop Color="#FF3CAC" Offset="1.0"/>
-        </LinearGradientBrush>
-    </ContentPage.Background>
 
     <VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="CenterAndExpand">
 
@@ -66,4 +59,4 @@
 
     </VerticalStackLayout>
 
-</ContentPage>
+</local:BasePage>

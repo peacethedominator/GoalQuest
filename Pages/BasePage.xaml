@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GoalQuest"
+             x:Class="GoalQuest.BasePage">
+
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="#F8CFA0" Offset="0.0"/>
+            <GradientStop Color="#EC6F66" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ContentPage.Content>
+        <ContentPresenter/>
+    </ContentPage.Content>
+
+</ContentPage>

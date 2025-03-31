@@ -1,10 +1,7 @@
-using System;
-using Microsoft.Maui.Controls;
-using System.IO;
 
 namespace GoalQuest
 {
-    public partial class WelcomePage : ContentPage
+    public partial class WelcomePage : BasePage
     {
         private readonly Profile _profile;
 

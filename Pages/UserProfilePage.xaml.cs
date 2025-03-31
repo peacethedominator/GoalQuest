@@ -1,12 +1,8 @@
-using Microsoft.Extensions.Logging.Abstractions;
-using Microsoft.Maui.Controls;
-using System.IO;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace GoalQuest
 {
-    public partial class UserProfilePage : ContentPage
+    public partial class UserProfilePage : BasePage
     {
         private readonly string userFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "UserData");
         private readonly string filePath;

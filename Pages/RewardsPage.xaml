@@ -1,8 +1,8 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<local:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GoalQuest"
              x:Class="GoalQuest.RewardsPage"
-             Title="Victory Chest"
-             BackgroundColor="#F8CFA0">
+             Title="Victory Chest">
 
     <VerticalStackLayout Padding="10" Spacing="10">
 
@@ -56,4 +56,4 @@
         </Frame>
 
     </VerticalStackLayout>
-</ContentPage>
+</local:BasePage>

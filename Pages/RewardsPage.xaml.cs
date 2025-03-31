@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Microsoft.Maui.Controls;
 
 namespace GoalQuest
 {
-    public partial class RewardsPage : ContentPage, INotifyPropertyChanged
+    public partial class RewardsPage : BasePage, INotifyPropertyChanged
     {
         private readonly string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GoalsData.json");
         private Dictionary<string, List<GoalItemProgress>> _goals;

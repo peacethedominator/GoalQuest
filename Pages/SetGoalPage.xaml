@@ -1,8 +1,8 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<local:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GoalQuest"
              x:Class="GoalQuest.SetGoalPage"
-             Title="Start Quest"
-             BackgroundColor="#F8CFA0">
+             Title="Start Quest">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
@@ -108,4 +108,4 @@
         </VerticalStackLayout>
     </ScrollView>
 
-</ContentPage>
+</local:BasePage>

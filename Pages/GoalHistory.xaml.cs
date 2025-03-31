@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text.Json;
-using Microsoft.Maui.Controls;
 
 namespace GoalQuest
 {
-    public partial class GoalHistory : ContentPage
+    public partial class GoalHistory : BasePage
     {
         private readonly string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GoalsData.json");
 

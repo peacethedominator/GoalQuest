@@ -11,7 +11,7 @@ using System.Text.Json.Serialization;
 
 namespace GoalQuest
 {
-    public partial class TrackProgressPage : ContentPage
+    public partial class TrackProgressPage : BasePage
     {
         private Dictionary<string, List<GoalItemProgress>> _goals;
         private readonly string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GoalsData.json");
