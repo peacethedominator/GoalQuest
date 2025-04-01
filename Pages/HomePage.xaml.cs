@@ -36,5 +36,9 @@ namespace GoalQuest
             await Navigation.PushAsync(new GoalHistory());
         }
         
+        private async void OnDeveloperClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new DeveloperPage());
+        }
     }
 }

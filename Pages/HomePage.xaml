@@ -83,5 +83,15 @@
                 HorizontalOptions="Center"
                 Clicked="OnGoalHistoryClicked"/>
 
+        <Button Text="Bug Hunter"
+            FontAttributes="Bold"
+            FontSize="10"
+            BackgroundColor="White"
+            TextColor="#A8295D"
+            CornerRadius="10"
+            Padding="10"
+            HorizontalOptions="Center"
+            Clicked="OnDeveloperClicked"/>
+        
     </VerticalStackLayout>
 </local:BasePage>

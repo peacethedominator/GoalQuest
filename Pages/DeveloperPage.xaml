@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:local="clr-namespace:GoalQuest"
+                x:Class="GoalQuest.DeveloperPage"
+                Title="Developer">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Label Text="Bug Hunter!"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+        <Label Text="Hello! I, Aman Varchaswi, am the developer of GoalQuest."
+               FontSize="16"
+               HorizontalOptions="Center"/>
+
+        <Label Text="I have made the application for users to set their goals, track their progress, and note a history of their goals."
+               FontSize="14"
+               HorizontalOptions="Center"/>
+
+        <Label Text="Let's Connect:"
+               FontSize="14"
+               HorizontalOptions="Center"/>
+        
+        <Label Text="Aman Varchaswi"
+               FontSize="14"
+               TextColor="Blue"
+               HorizontalOptions="Center"/>
+
+        <Label Text="varchaswiaman14@gmail.com"
+               FontSize="14"
+               TextColor="Blue"
+               HorizontalOptions="Center"/>
+
+        <Label Text="With 💛 from India !"
+               FontSize="14"
+               TextColor="Green"
+               HorizontalOptions="Center"/>
+
+        <Button Text="Back to Arsenal!"
+                Clicked="OnBackClicked"
+                HorizontalOptions="Center"
+                BackgroundColor="#407C82"
+                TextColor="White"/>
+
+    </VerticalStackLayout>
+
+</local:BasePage>
