@@ -17,25 +17,38 @@ namespace GoalQuest
 
         private void LoadExistingGoals()
         {
-            var allGoals = _goals.OrderBy(g => g.Key).SelectMany(g => g.Value).ToList();
-            GoalsCollection.ItemsSource = allGoals;
+            DateTime today = DateTime.Today;
+            var filteredGoals = _goals
+                .Where(g => DateTime.Parse(g.Key) >= today)
+                .OrderBy(g => g.Key)
+                .SelectMany(g => g.Value)
+                .ToList();
+
+            GoalsCollection.ItemsSource = filteredGoals;
             UpdateTotalPoints();
         }
 
-        private void OnAddGoalClicked(object sender, EventArgs e)
+        private async void OnAddGoalClicked(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(GoalEntry.Text) || PointPicker.SelectedItem == null) return;
 
-            string selectedDate = GoalDatePicker.Date.ToString("yyyy-MM-dd");
+            DateTime selectedDate = GoalDatePicker.Date;
+            if (selectedDate < DateTime.Today)
+            {
+                await DisplayAlert("Invalid Date", "You cannot add goals for past dates.", "OK");
+                return;
+            }
+
+            string selectedDateString = selectedDate.ToString("yyyy-MM-dd");
             int points = int.Parse(PointPicker.SelectedItem.ToString());
 
-            var newGoal = new GoalItem(GoalEntry.Text, points, selectedDate, RemoveGoal, EditGoal);
+            var newGoal = new GoalItem(GoalEntry.Text, points, selectedDateString, RemoveGoal, EditGoal);
 
-            if (!_goals.ContainsKey(selectedDate))
+            if (!_goals.ContainsKey(selectedDateString))
             {
-                _goals[selectedDate] = new List<GoalItem>();
+                _goals[selectedDateString] = new List<GoalItem>();
             }
-            _goals[selectedDate].Add(newGoal);
+            _goals[selectedDateString].Add(newGoal);
 
             GoalEntry.Text = string.Empty;
             LoadExistingGoals();
@@ -116,18 +129,21 @@ namespace GoalQuest
                     var loadedGoals = JsonSerializer.Deserialize<Dictionary<string, List<GoalItem>>>(json) ?? new Dictionary<string, List<GoalItem>>();
                     var result = new Dictionary<string, List<GoalItem>>();
 
+                    DateTime today = DateTime.Today;
                     foreach (var dateEntry in loadedGoals)
                     {
-                        var date = dateEntry.Key; 
-                        var goalList = dateEntry.Value; 
-                        foreach (var goal in goalList)
+                        if (DateTime.Parse(dateEntry.Key) >= today)
                         {
-                            goal.Date = date;
-                            goal.InitializeCommands(RemoveGoal, EditGoal);
+                            var date = dateEntry.Key;
+                            var goalList = dateEntry.Value;
+                            foreach (var goal in goalList)
+                            {
+                                goal.Date = date;
+                                goal.InitializeCommands(RemoveGoal, EditGoal);
+                            }
+                            result[date] = goalList;
                         }
-                        result[date] = goalList;
                     }
-
                     return result;
                 }
                 catch (Exception ex)
@@ -137,38 +153,37 @@ namespace GoalQuest
             }
             return new Dictionary<string, List<GoalItem>>();
         }
-
     }
 
     public class GoalItem
     {
-        public string Goal { get; set; }
-        public int Points { get; set; }
-        public string Date { get; set; }
+            public string Goal { get; set; }
+            public int Points { get; set; }
+            public string Date { get; set; }
 
-        [JsonIgnore]
-        public Command RemoveCommand { get; private set; }
+            [JsonIgnore]
+            public Command RemoveCommand { get; private set; }
 
-        [JsonIgnore]
-        public Command EditCommand { get; private set; }
+            [JsonIgnore]
+            public Command EditCommand { get; private set; }
 
-        public int Status { get; set; }
-        public string ButtonText { get; set; }
-        public string ButtonColor { get; set; }
-        public GoalItem() { }
+            public int Status { get; set; }
+            public string ButtonText { get; set; }
+            public string ButtonColor { get; set; }
+            public GoalItem() { }
 
-        public GoalItem(string goal, int points, string date, Action<GoalItem> removeAction, Action<GoalItem> editAction)
-        {
-            Goal = goal;
-            Points = points;
-            Date = date;
-            InitializeCommands(removeAction, editAction);
-        }
+            public GoalItem(string goal, int points, string date, Action<GoalItem> removeAction, Action<GoalItem> editAction)
+            {
+                Goal = goal;
+                Points = points;
+                Date = date;
+                InitializeCommands(removeAction, editAction);
+            }
 
-        public void InitializeCommands(Action<GoalItem> removeAction, Action<GoalItem> editAction)
-        {
-            RemoveCommand = new Command(() => removeAction(this));
-            EditCommand = new Command(() => editAction(this));
-        }
+            public void InitializeCommands(Action<GoalItem> removeAction, Action<GoalItem> editAction)
+            {
+                RemoveCommand = new Command(() => removeAction(this));
+                EditCommand = new Command(() => editAction(this));
+            }
     }
 }
