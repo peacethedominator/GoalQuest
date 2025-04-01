@@ -1,4 +1,4 @@
-<local:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<local:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GoalQuest"
              x:Class="GoalQuest.SetGoalPage"
@@ -19,6 +19,10 @@
                    TextColor="Black"
                    HorizontalOptions="FillAndExpand"/>
 
+            <DatePicker x:Name="GoalDatePicker"
+                        Format="yyyy-MM-dd"
+                        HorizontalOptions="FillAndExpand" />
+            
             <Picker x:Name="PointPicker" Title="Select Points" HorizontalOptions="FillAndExpand" HeightRequest="40">
                 <Picker.Items>
                     <x:String>5</x:String>
@@ -38,7 +42,6 @@
                     FontAttributes="Bold"
                     HorizontalOptions="Center"/>
 
-            <!-- Scrollable Box for Goals -->
             <Frame BorderColor="Black" CornerRadius="10" Padding="10" BackgroundColor="White">
                 <CollectionView x:Name="GoalsCollection" VerticalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
@@ -47,57 +50,64 @@
                                 <Grid ColumnSpacing="10" RowSpacing="5">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
-                                        <!-- Goal & Points -->
                                         <ColumnDefinition Width="30" />
-                                        <!-- X Button -->
+                                        <ColumnDefinition Width="30" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
-                                        <!-- Goal -->
                                         <RowDefinition Height="Auto"/>
-                                        <!-- Points -->
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
 
-                                    <!-- Goal Text -->
                                     <Label Text="{Binding Goal}" 
                            FontSize="15" 
                            FontAttributes="Bold"
                            Grid.Row="0" Grid.Column="0"/>
 
-                                    <!-- Points -->
                                     <Label Text="{Binding Points, StringFormat='Points: {0}'}" 
                            FontSize="13"
                            TextColor="Gray"
                            Grid.Row="1" Grid.Column="0"/>
 
-                                    <!-- "X" Button (Right-Aligned) -->
-                                    <Button Text="X"
+                                    <Label Text="{Binding Date, StringFormat='Date: {0:yyyy-MM-dd}'}"
+                           FontSize="12"
+                           TextColor="#3376FE"
+                           Grid.Row="2" Grid.Column="0"/>
+
+                                    <Button Text="✎"
+                            BackgroundColor="#0055FF"
+                            TextColor="White"
+                            WidthRequest="30"
+                            HeightRequest="30"
+                            CornerRadius="15"
+                            Command="{Binding EditCommand}"
+                            Grid.RowSpan="3"
+                            Grid.Column="1"
+                            VerticalOptions="Center"/>
+
+                                    <Button Text="-"
                             BackgroundColor="Red"
                             TextColor="White"
                             WidthRequest="30"
                             HeightRequest="30"
                             CornerRadius="15"
                             Command="{Binding RemoveCommand}"
-                            Grid.RowSpan="2"
-                            Grid.Column="1"
+                            Grid.RowSpan="3"
+                            Grid.Column="2"
                             VerticalOptions="Center"/>
                                 </Grid>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-
-
             </Frame>
 
-            <!-- Total Points -->
             <Label x:Name="TotalPointsLabel"
                    Text="Total Points: 0"
                    FontSize="20"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"/>
 
-            <!-- Save Button -->
             <Button Text="Let's conquer!"
                     BackgroundColor="#407C82"                  
                     FontSize="20"

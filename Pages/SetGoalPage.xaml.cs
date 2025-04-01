@@ -1,75 +1,94 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace GoalQuest
 {
     public partial class SetGoalPage : BasePage
     {
         private Dictionary<string, List<GoalItem>> _goals;
-        private List<GoalItem> _tempGoals;
         private readonly string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GoalsData.json");
 
         public SetGoalPage()
         {
             InitializeComponent();
-            _tempGoals = new List<GoalItem>();
             _goals = LoadGoals();
             LoadExistingGoals();
         }
 
         private void LoadExistingGoals()
         {
-            string dateKey = DateTime.Now.ToString("yyyy-MM-dd");
-
-            //_tempGoals.Clear();
-
-            if (_goals.TryGetValue(dateKey, out var existingGoals))
-            {
-                _tempGoals.AddRange(existingGoals
-                    .Select(g => new GoalItem(g.Goal, g.Points, RemoveGoal)));
-            }
-            DisplayGoals();
+            var allGoals = _goals.OrderBy(g => g.Key).SelectMany(g => g.Value).ToList();
+            GoalsCollection.ItemsSource = allGoals;
+            UpdateTotalPoints();
         }
 
         private void OnAddGoalClicked(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(GoalEntry.Text) || PointPicker.SelectedItem == null) return;
 
+            string selectedDate = GoalDatePicker.Date.ToString("yyyy-MM-dd");
             int points = int.Parse(PointPicker.SelectedItem.ToString());
-            _tempGoals.Add(new GoalItem(GoalEntry.Text, points, RemoveGoal));
+
+            var newGoal = new GoalItem(GoalEntry.Text, points, selectedDate, RemoveGoal, EditGoal);
+
+            if (!_goals.ContainsKey(selectedDate))
+            {
+                _goals[selectedDate] = new List<GoalItem>();
+            }
+            _goals[selectedDate].Add(newGoal);
 
             GoalEntry.Text = string.Empty;
-            DisplayGoals();
-        }
-
-        private void DisplayGoals()
-        {
-            GoalsCollection.ItemsSource = null; // Ensure proper UI refresh
-            GoalsCollection.ItemsSource = _tempGoals;
-            UpdateTotalPoints();
+            LoadExistingGoals();
         }
 
         private void UpdateTotalPoints()
         {
-            int totalPoints = _tempGoals.Sum(g => g.Points);
-            TotalPointsLabel.Text = $"Total Points: {totalPoints}";
+            if (GoalsCollection.ItemsSource is List<GoalItem> currentGoals)
+            {
+                int totalPoints = currentGoals.Sum(g => g.Points);
+                TotalPointsLabel.Text = $"Total Points: {totalPoints}";
+            }
         }
 
         private void RemoveGoal(GoalItem goalItem)
         {
-            _tempGoals.Remove(goalItem);
-            DisplayGoals();
+            if (goalItem == null || string.IsNullOrEmpty(goalItem.Date)) return;
+
+            string goalDateKey = goalItem.Date;
+
+            if (_goals.ContainsKey(goalDateKey))
+            {
+                _goals[goalDateKey].Remove(goalItem);
+                if (_goals[goalDateKey].Count == 0)
+                {
+                    _goals.Remove(goalDateKey);
+                }
+            }
+            LoadExistingGoals();
+        }
+
+        private void EditGoal(GoalItem goalItem)
+        {
+            if (goalItem == null || string.IsNullOrEmpty(goalItem.Date)) return;
+
+            GoalEntry.Text = goalItem.Goal;
+
+            if (DateTime.TryParse(goalItem.Date, out DateTime parsedDate))
+            {
+                GoalDatePicker.Date = parsedDate;
+            }
+            else
+            {
+                Console.WriteLine($"Invalid date format: {goalItem.Date}");
+            }
+
+            PointPicker.SelectedItem = goalItem.Points.ToString();
+            RemoveGoal(goalItem);
         }
 
         private async void OnSaveGoalsClicked(object sender, EventArgs e)
         {
-            string dateKey = DateTime.Now.ToString("yyyy-MM-dd");
-
-            _goals[dateKey] = _tempGoals
-            .Select(g => new GoalItem(g.Goal, g.Points, RemoveGoal))
-            .ToList();
-
             SaveGoals();
-
             await DisplayAlert("Success", "Goals saved successfully!", "OK");
             await Navigation.PushAsync(new HomePage());
         }
@@ -94,12 +113,22 @@ namespace GoalQuest
                 try
                 {
                     string json = File.ReadAllText(_filePath);
-                    var rawData = JsonSerializer.Deserialize<Dictionary<string, List<GoalItemDto>>>(json);
+                    var loadedGoals = JsonSerializer.Deserialize<Dictionary<string, List<GoalItem>>>(json) ?? new Dictionary<string, List<GoalItem>>();
+                    var result = new Dictionary<string, List<GoalItem>>();
 
-                    return rawData?.ToDictionary(
-                        kvp => kvp.Key,
-                        kvp => kvp.Value.Select(g => new GoalItem(g.Goal, g.Points, RemoveGoal)).ToList()
-                    ) ?? new Dictionary<string, List<GoalItem>>();
+                    foreach (var dateEntry in loadedGoals)
+                    {
+                        var date = dateEntry.Key; 
+                        var goalList = dateEntry.Value; 
+                        foreach (var goal in goalList)
+                        {
+                            goal.Date = date;
+                            goal.InitializeCommands(RemoveGoal, EditGoal);
+                        }
+                        result[date] = goalList;
+                    }
+
+                    return result;
                 }
                 catch (Exception ex)
                 {
@@ -108,25 +137,38 @@ namespace GoalQuest
             }
             return new Dictionary<string, List<GoalItem>>();
         }
+
     }
 
     public class GoalItem
     {
         public string Goal { get; set; }
         public int Points { get; set; }
-        public string DisplayText => $"{Goal} \n{Points} Points";
-        public Command RemoveCommand { get; }
+        public string Date { get; set; }
 
-        public GoalItem(string goal, int points, Action<GoalItem> removeAction)
+        [JsonIgnore]
+        public Command RemoveCommand { get; private set; }
+
+        [JsonIgnore]
+        public Command EditCommand { get; private set; }
+
+        public int Status { get; set; }
+        public string ButtonText { get; set; }
+        public string ButtonColor { get; set; }
+        public GoalItem() { }
+
+        public GoalItem(string goal, int points, string date, Action<GoalItem> removeAction, Action<GoalItem> editAction)
         {
             Goal = goal;
             Points = points;
-            RemoveCommand = new Command(() => removeAction(this));
+            Date = date;
+            InitializeCommands(removeAction, editAction);
         }
-    }
-    public class GoalItemDto
-    {
-        public string Goal { get; set; }
-        public int Points { get; set; }
+
+        public void InitializeCommands(Action<GoalItem> removeAction, Action<GoalItem> editAction)
+        {
+            RemoveCommand = new Command(() => removeAction(this));
+            EditCommand = new Command(() => editAction(this));
+        }
     }
 }
