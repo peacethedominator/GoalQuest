@@ -19,14 +19,14 @@ namespace GoalQuest
                 WelcomeLabel.Text = $"Welcome back, {_profile.Name}!";
                 MotivationLabel.Text = $"Pumped up to be: {_profile.Motivation}?";
 
-                if (!string.IsNullOrEmpty(_profile.ImagePath) && File.Exists(_profile.ImagePath))
+                string profileImagePath = _profile.ImagePath;
+
+                if (string.IsNullOrEmpty(profileImagePath) || !File.Exists(profileImagePath))
                 {
-                    ProfileImage.Source = ImageSource.FromFile(_profile.ImagePath);
+                    profileImagePath = "default_profile.jpg";
                 }
-                else
-                {
-                    ProfileImage.Source = "placeholder.png"; // Ensure this file exists in Resources/Images
-                }
+
+                ProfileImage.Source = ImageSource.FromFile(profileImagePath);
             }
         }
 
