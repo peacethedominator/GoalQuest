@@ -11,6 +11,7 @@ namespace GoalQuest
         private readonly string userFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "UserData");
         private readonly string filePath;
         private string _profileImagePath;
+        private readonly string defaultImagePath = "default_profile.jpg";
 
         public UserProfilePage()
         {
@@ -37,16 +38,20 @@ namespace GoalQuest
                     NameEntry.Text = profile.Name;
                     DOBEntry.Date = DateTime.Parse(profile.DateOfBirth);
                     MotivationEntry.Text = profile.Motivation;
-                    ProfileImageButton.Source = ImageSource.FromFile(profile.ImagePath);
-                    _profileImagePath = profile.ImagePath;
+                    _profileImagePath = string.IsNullOrWhiteSpace(profile.ImagePath) ? defaultImagePath : profile.ImagePath;
+                    ProfileImageButton.Source = ImageSource.FromFile(_profileImagePath);
                 }
+            }
+            else
+            {
+                _profileImagePath = defaultImagePath;
+                ProfileImageButton.Source = ImageSource.FromFile(defaultImagePath);
             }
         }
 
         private async Task SaveProfileData(string name, string dob, string aim, string imagePath)
         {
-            string imageFileName = Path.GetFileName(imagePath);
-            string destinationPath = Path.Combine(userFolder, imageFileName);
+            string destinationPath = string.IsNullOrWhiteSpace(imagePath) ? defaultImagePath : Path.Combine(userFolder, Path.GetFileName(imagePath));
 
             try
             {
@@ -147,6 +152,6 @@ namespace GoalQuest
         public required string Name { get; set; }
         public required string DateOfBirth { get; set; }
         public required string Motivation { get; set; }
-        public required string ImagePath { get; set; }
+        public string ImagePath { get; set; } = "default_profile.png";
     }
 }
