@@ -38,8 +38,7 @@
                     BackgroundColor="#272D2D"
                     TextColor="White"
                     CornerRadius="10"
-                    Padding="15"
-                    
+                    Padding="15" 
                     Clicked="StartButton_Clicked"/>
         </VerticalStackLayout>
 

@@ -52,7 +52,7 @@ namespace GoalQuest
         private async Task SaveProfileData(string name, string dob, string aim, string imagePath)
         {
             string destinationPath = string.IsNullOrWhiteSpace(imagePath) ? defaultImagePath : Path.Combine(userFolder, Path.GetFileName(imagePath));
-
+            
             try
             {
                 if (!Directory.Exists(userFolder))
@@ -86,7 +86,7 @@ namespace GoalQuest
                     Motivation = aim,
                     ImagePath = destinationPath
                 };
-
+                
                 var jsonData = JsonSerializer.Serialize(profile, new JsonSerializerOptions { WriteIndented = true });
                 await File.WriteAllTextAsync(filePath, jsonData);
 

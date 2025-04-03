@@ -22,7 +22,7 @@ namespace GoalQuest
         {
             //await Navigation.PushAsync(new UserProfilePage());
             var userProfilePage = new UserProfilePage();
-            await userProfilePage.LoadProfileDataAsync(); 
+            await userProfilePage.LoadProfileDataAsync();
             await Navigation.PushAsync(userProfilePage);
         }
 

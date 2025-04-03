@@ -110,8 +110,25 @@ namespace GoalQuest
         {
             try
             {
-                string json = JsonSerializer.Serialize(_goals, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(_filePath, json);
+                var existingGoals = new Dictionary<string, List<GoalItem>>();
+
+                if (File.Exists(_filePath))
+                {
+                    string json = File.ReadAllText(_filePath);
+                    existingGoals = JsonSerializer.Deserialize<Dictionary<string, List<GoalItem>>>(json)
+                                    ?? new Dictionary<string, List<GoalItem>>();
+                }
+
+                foreach (var entry in existingGoals)
+                {
+                    if (!_goals.ContainsKey(entry.Key))
+                    {
+                        _goals[entry.Key] = entry.Value;
+                    }
+                }
+
+                string updatedJson = JsonSerializer.Serialize(_goals, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(_filePath, updatedJson);
             }
             catch (Exception ex)
             {
@@ -129,20 +146,16 @@ namespace GoalQuest
                     var loadedGoals = JsonSerializer.Deserialize<Dictionary<string, List<GoalItem>>>(json) ?? new Dictionary<string, List<GoalItem>>();
                     var result = new Dictionary<string, List<GoalItem>>();
 
-                    DateTime today = DateTime.Today;
                     foreach (var dateEntry in loadedGoals)
                     {
-                        if (DateTime.Parse(dateEntry.Key) >= today)
+                        var date = dateEntry.Key;
+                        var goalList = dateEntry.Value;
+                        foreach (var goal in goalList)
                         {
-                            var date = dateEntry.Key;
-                            var goalList = dateEntry.Value;
-                            foreach (var goal in goalList)
-                            {
-                                goal.Date = date;
-                                goal.InitializeCommands(RemoveGoal, EditGoal);
-                            }
-                            result[date] = goalList;
+                            goal.Date = date;
+                            goal.InitializeCommands(RemoveGoal, EditGoal);
                         }
+                        result[date] = goalList;
                     }
                     return result;
                 }
