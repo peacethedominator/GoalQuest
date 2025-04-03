@@ -16,7 +16,13 @@ public partial class MainPage : ContentPage
         "Set your goals high, and don't stop until you get there.",
         "You are never too old to set another goal or to dream a new dream.",
         "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-        "Discipline is the bridge between goals and accomplishment."
+        "Discipline is the bridge between goals and accomplishment.",
+        "Be loyal to your fututre, not your past.",
+        "A lot will go wrong before everything goes right.",
+        "Nothing is scarier than avoiding your full potential",
+        "Step out of your comfort zone, and face your fears.",
+        "Doubts kill more dreams than failure ever will.",
+        "The happiness of your life depends on the quality of your thoughts."
     };
 
     public MainPage()

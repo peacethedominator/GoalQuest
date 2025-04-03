@@ -31,7 +31,7 @@
         <!-- Button to set profile or start at bottom -->
         <VerticalStackLayout VerticalOptions="EndAndExpand">
             <Button x:Name="StartButton"
-                    Text="Let's make Progress ..."
+                    Text="Forge Your Path"
                     FontAttributes="Bold"
                     FontSize="20"
                     FontFamily="sans-serif"

@@ -37,21 +37,21 @@
         <!-- Daily Progress Section -->
         <Frame Padding="10" CornerRadius="15" BackgroundColor="#ACE9AA" HasShadow="True">
             <VerticalStackLayout Spacing="10">
-                <Label Text="Daily Progress" FontFamily="serif" FontSize="18" FontAttributes="Bold"/>
+                <Label Text="Daily Progress" TextColor="Black"  FontFamily="serif" FontSize="18" FontAttributes="Bold"/>
                 <ProgressBar x:Name="DailyProgressBar" Progress="0" HeightRequest="20"/>
-                <Label x:Name="DailyPointsLabel" FontSize="16" Text="0/100 pts"/>
-                <Label x:Name="DailyProgressPercentageLabel" FontSize="14" Text="0% Complete"/>
+                <Label x:Name="DailyPointsLabel" TextColor="Black" FontSize="16" Text="0/100 pts"/>
+                <Label x:Name="DailyProgressPercentageLabel" TextColor="Black" FontSize="14" Text="0% Complete"/>
             </VerticalStackLayout>
         </Frame>
 
         <!-- All-Time Progress Section -->
         <Frame Padding="10" CornerRadius="15" BackgroundColor="#B9B9CB" HasShadow="True">
             <VerticalStackLayout Spacing="10">
-                <Label Text="All-Time Progress" FontFamily="serif" FontSize="18" FontAttributes="Bold"/>
+                <Label Text="All-Time Progress" TextColor="Black" FontFamily="serif" FontSize="18" FontAttributes="Bold"/>
                 <ProgressBar x:Name="AllTimeProgressBar" Progress="0" HeightRequest="20"/>
-                <Label x:Name="AllTimePointsLabel" FontSize="16" Text="0/1000 pts"/>
-                <Label x:Name="AllTimeProgressPercentageLabel" FontSize="14" Text="0% Complete"/>
-                <Label x:Name="StreakLabel" FontSize="14" Text="Streak: 0 days"/>
+                <Label x:Name="AllTimePointsLabel" TextColor="Black" FontSize="16" Text="0/1000 pts"/>
+                <Label x:Name="AllTimeProgressPercentageLabel" TextColor="Black" FontSize="14" Text="0% Complete"/>
+                <Label x:Name="StreakLabel" FontSize="14" TextColor="Black" Text="Streak: 0 days"/>
             </VerticalStackLayout>
         </Frame>
 

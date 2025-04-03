@@ -40,7 +40,7 @@
                HorizontalOptions="Center"/>
 
         <!-- Animated Button -->
-        <Button Text="Let's Begin!"
+        <Button Text="March Ahead!"
                 FontAttributes="Bold"
                 FontSize="22"
                 BackgroundColor="#272D2D"
