@@ -1,4 +1,4 @@
-namespace GoalQuest // Make sure this matches the actual namespace
+namespace GoalQuest 
 {
     public partial class BasePage : ContentPage
     {

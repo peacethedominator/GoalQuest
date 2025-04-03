@@ -4,47 +4,108 @@
                 xmlns:local="clr-namespace:GoalQuest"
                 x:Class="GoalQuest.DeveloperPage"
                 Title="Developer">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
-
-        <Label Text="Bug Hunter!"
+            <Label Text="Bug Hunter!"
                FontSize="24"
                FontAttributes="Bold"
                HorizontalOptions="Center"/>
 
-        <Label Text="Hello! I, Aman Varchaswi, am the developer of GoalQuest."
+            <Label Text="Hello! I, Aman Varchaswi, am the developer of GoalQuest."
                FontSize="16"
                HorizontalOptions="Center"/>
 
-        <Label Text="I have made the application for users to set their goals, track their progress, and note a history of their goals."
+            <Label Text="I have made the application for users to set their goals, track their progress, and note a history of their goals."
+               TextColor="Black"
+               FontSize="12"
+               HorizontalOptions="Center"/>
+            
+            <Label Text="Start Quest :"
+               TextColor="Blue"
+               FontSize="15"
+               FontAttributes="Bold"
+               HorizontalOptions="Fill"/>
+
+            <Label Text="A dedicated space where users can set and define their personal goals. Each goal is assigned points based on its priority (5 or 10 points), allowing users to track the significance of each goal. These points will later contribute to the user's rewards and progress. "
+               TextColor="Black"
+               FontSize="12"
+               HorizontalOptions="Center"/>
+
+            <Label Text="Journey Log :"
+               TextColor="Blue"
+               FontSize="15"
+               FontAttributes="Bold"
+               HorizontalOptions="Fill"/>
+
+            <Label Text="A daily tracker for users to log their progress and reflect on their actions. Every milestone reached, regardless of priority, helps users stay focused and motivated toward completing their goals."
+               TextColor="Black"
+               FontSize="12"
+               HorizontalOptions="Center"/>
+
+            <Label Text="Hero's Vault :"
+               TextColor="Blue"
+               FontSize="15"
+               FontAttributes="Bold"
+               HorizontalOptions="Fill"/>
+
+            <Label Text="The personal profile section where users can store their information, revisit their aim, change their profile image. "
+                   FontSize="12"
+                   HorizontalOptions="Center"/>
+
+            <Label Text="Victory Chest :"
+               TextColor="Blue"
+               FontSize="15"
+               FontAttributes="Bold"
+               HorizontalOptions="Fill"/>
+            
+            <Label Text="The rewards system where users are rewarded for achieving goals, with the points earned in Goal Quest (5 or 10 points) determining the level of rewards. Completing goals unlocks level which gets harder, encouraging continued progress and streaks."
+                TextColor="Black"
+                FontSize="12"
+                HorizontalOptions="Center"/>
+            
+            <Label Text="Warrior's tale :"
+               TextColor="Blue"
+               FontSize="15"
+               FontAttributes="Bold"
+               HorizontalOptions="Fill"/>
+
+            <Label Text=" A historical log of all the goals a user has set datewise, with the ability to reflect on their growth over time. "
+               TextColor="Black"
+               FontSize="12"
+               HorizontalOptions="Center"/>
+
+            <Label Text="All the data set by users, including their goals, progress logs, rewards, and personal details, are stored exclusively on the device. This ensures that users have full control over their information, keeping it secure and private, without being stored on external servers. The data remains local, offering peace of mind and control over their personal journey. "
+               TextColor="ForestGreen"
+               FontSize="12"
+               HorizontalOptions="Center"/>
+
+            <Label Text="Let's Connect:"
                FontSize="14"
                HorizontalOptions="Center"/>
 
-        <Label Text="Let's Connect:"
-               FontSize="14"
-               HorizontalOptions="Center"/>
-        
-        <Label Text="Aman Varchaswi"
+            <Label Text="Aman Varchaswi"
                FontSize="14"
                TextColor="Blue"
                HorizontalOptions="Center"/>
 
-        <Label Text="varchaswiaman14@gmail.com"
+            <Label Text="varchaswiaman14@gmail.com"
                FontSize="14"
                TextColor="Blue"
                HorizontalOptions="Center"/>
 
-        <Label Text="With 💛 from India !"
+            <Label Text="With 💛 from India !"
                FontSize="14"
                TextColor="Green"
                HorizontalOptions="Center"/>
 
-        <Button Text="Back to Arsenal!"
+            <Button Text="Back to Arsenal!"
                 Clicked="OnBackClicked"
                 HorizontalOptions="Center"
                 BackgroundColor="#407C82"
                 TextColor="White"/>
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 
 </local:BasePage>

@@ -1,4 +1,5 @@
 using System.Text.Json;
+using GoalQuest.Models;
 
 namespace GoalQuest
 {
@@ -64,15 +65,4 @@ namespace GoalQuest
         }
     }
 
-    public class GoalGroup
-    {
-        public string Date { get; set; }
-        public List<GoalHistoryItem> Goals { get; set; }
-    }
-
-    public class GoalHistoryItem
-    {
-        public string GoalTitle { get; set; }
-        public string StatusColor { get; set; }
-    }
 }

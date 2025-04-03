@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Text.Json;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Microsoft.Maui.Controls;
-using System.Text.Json.Serialization;
+using GoalQuest.Models;
 
 namespace GoalQuest
 {
@@ -17,7 +10,7 @@ namespace GoalQuest
         private readonly string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "GoalsData.json");
         private string _dateKey;
 
-        public ObservableCollection<GoalItemProgress> Goals { get; set; } = new(); // Use ObservableCollection
+        public ObservableCollection<GoalItemProgress> Goals { get; set; } = new();
 
         public TrackProgressPage()
         {
@@ -104,72 +97,7 @@ namespace GoalQuest
             return new Dictionary<string, List<GoalItemProgress>>();
         }
     }
-
-    public class GoalItemProgress : INotifyPropertyChanged
-    {
-        private GoalStatus _status;
-        private string _buttonText;
-        private string _buttonColor;
-
-        public string Goal { get; set; }
-        public int Points { get; set; }
-
-        public GoalStatus Status
-        {
-            get => _status;
-            set
-            {
-                _status = value;
-                OnPropertyChanged();
-                UpdateButtonProperties();
-            }
-        }
-
-        public string ButtonText
-        {
-            get => _buttonText;
-            private set
-            {
-                _buttonText = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string ButtonColor
-        {
-            get => _buttonColor;
-            private set
-            {
-                _buttonColor = value;
-                OnPropertyChanged();
-            }
-        }
-
-        [JsonIgnore]
-        public Command ToggleStatusCommand { get; set; }
-
-        public GoalItemProgress(string goal, int points)
-        {
-            Goal = goal;
-            Points = points;
-            Status = GoalStatus.Incomplete;
-            UpdateButtonProperties();
-            ToggleStatusCommand = new Command(() => { }); 
-        }
-
-        public void UpdateButtonProperties()
-        {
-            ButtonText = Status == GoalStatus.Completed ? "✔" : "✖";
-            ButtonColor = Status == GoalStatus.Completed ? "Green" : "Red";
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
+    
     public enum GoalStatus
     {
         Incomplete,

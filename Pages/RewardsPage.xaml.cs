@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using GoalQuest.Models;
 
 namespace GoalQuest
 {
@@ -114,21 +115,17 @@ namespace GoalQuest
 
         private void UpdateProgress()
         {
-            // Get total possible points for today
             int totalDailyPoints = _goals.ContainsKey(_dateKey)
                 ? _goals[_dateKey].Sum(g => g.Points)
                 : 0;
 
-            // Get total all-time possible points
             int totalAllTimePoints = _goals.Values
                 .SelectMany(g => g)
                 .Sum(g => g.Points);
 
-            // Ensure we avoid division by zero
             double dailyProgress = (totalDailyPoints > 0) ? (double)DailyPoints / totalDailyPoints : 0;
             double allTimeProgress = (totalAllTimePoints > 0) ? (double)AllTimePoints / totalAllTimePoints : 0;
 
-            // Update progress bars
             if (DailyProgressBar != null)
             {
                 DailyProgressBar.Progress = Math.Min(dailyProgress, 1.0);
@@ -139,14 +136,13 @@ namespace GoalQuest
                 AllTimeProgressBar.Progress = Math.Min(allTimeProgress, 1.0);
             }
 
-            // Update text labels with correct values
             DailyPointsLabel.Text = $"{DailyPoints}/{totalDailyPoints} pts";
             DailyProgressPercentageLabel.Text = $"{(dailyProgress * 100):0}% Complete";
 
             AllTimePointsLabel.Text = $"{AllTimePoints}/{totalAllTimePoints} pts";
             AllTimeProgressPercentageLabel.Text = $"{(allTimeProgress * 100):0}% Complete";
 
-            int streak = CalculateStreak(); // Get streak count
+            int streak = CalculateStreak();
             StreakLabel.Text = $"{streak}-day streak!";
         }
 
@@ -193,11 +189,11 @@ namespace GoalQuest
                 if (_goals.ContainsKey(dateKey) && _goals[dateKey].Any(g => g.Status == GoalStatus.Completed))
                 {
                     streak++;
-                    currentDate = currentDate.AddDays(-1); // Move to the previous day
+                    currentDate = currentDate.AddDays(-1);
                 }
                 else
                 {
-                    break; // Stop when a day is found with no completed goals
+                    break; 
                 }
             }
 

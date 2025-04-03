@@ -1,3 +1,4 @@
+using GoalQuest.Models;
 
 namespace GoalQuest
 {

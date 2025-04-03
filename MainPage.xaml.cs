@@ -1,7 +1,5 @@
-﻿using System;
-using System.Text.Json;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Storage;
+﻿using System.Text.Json;
+using GoalQuest.Models;
 
 namespace GoalQuest;
 

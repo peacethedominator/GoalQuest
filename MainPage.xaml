@@ -20,7 +20,7 @@
             <Label x:Name="QuoteLabel" 
                    FontSize="24" 
                    TextColor="Black"
-                   FontFamily="cursive"
+                   FontFamily="serif"
                    FontAttributes="Italic"
                    HorizontalOptions="Center" 
                    VerticalOptions="Center"/>

@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
+using GoalQuest.Models;
 
 namespace GoalQuest
 {
@@ -147,11 +148,4 @@ namespace GoalQuest
         }
     }
 
-    public class Profile
-    {
-        public required string Name { get; set; }
-        public required string DateOfBirth { get; set; }
-        public required string Motivation { get; set; }
-        public string ImagePath { get; set; } = "default_profile.png";
-    }
 }
