@@ -50,8 +50,9 @@
                HorizontalOptions="Fill"/>
 
             <Label Text="The personal profile section where users can store their information, revisit their aim, change their profile image. "
-                   FontSize="12"
-                   HorizontalOptions="Center"/>
+               TextColor="Black"     
+               FontSize="12"
+               HorizontalOptions="Center"/>
 
             <Label Text="Victory Chest :"
                TextColor="Blue"
