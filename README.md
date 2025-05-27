@@ -56,6 +56,8 @@ Gradient Background across all pages.
 
 Responsive Layouts for different screen sizes.
 
+![App Screenshot](Resources/Images/quote.jpeg)
+
 ______________________________________________________________________________________________
 🔧 Troubleshooting
 
@@ -67,6 +69,7 @@ Data not loading? Verify GoalsData.json exists in local storage.
 
 ______________________________________________________________________________________________
 Creating APK
+
 dotnet publish -f net8.0-android -c Release -o ./publish
 
 ______________________________________________________________________________________________
