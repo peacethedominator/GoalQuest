@@ -56,7 +56,22 @@ Gradient Background across all pages.
 
 Responsive Layouts for different screen sizes.
 
-![App Screenshot](Resources/Images/quote.jpeg)
+<p align="center">
+  <img src="Resources/Images/quote.jpeg" height="200px" />
+  <img src="Resources/Images/welcome.jpeg" height="200px" />
+  <img src="Resources/Images/arsenal.jpeg" height="200px" />
+</p>
+<p align="center">
+  <img src="Resources/Images/start_quest.jpeg" height="200px" />
+  <img src="Resources/Images/journey_log.jpeg" height="200px" />
+  <img src="Resources/Images/victory_chest.jpeg" height="200px" />
+</p>
+<p align="center">
+  <img src="Resources/Images/hero_vault.jpeg" height="200px" />
+  <img src="Resources/Images/warrior_tale.jpeg" height="200px" />
+  <img src="Resources/Images/bug_hunter.jpeg" height="200px" />
+</p>
+
 
 ______________________________________________________________________________________________
 🔧 Troubleshooting
